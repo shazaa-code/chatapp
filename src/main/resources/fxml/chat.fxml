@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controller.ChatController"
+            style="-fx-padding:10;">
+
+    <top>
+        <Label fx:id="statusLabel" text="Connected" style="-fx-padding:5;"/>
+    </top>
+
+    <center>
+        <VBox spacing="10">
+            <TextArea fx:id="publicArea" editable="false" VBox.vgrow="ALWAYS"/>
+            <HBox spacing="5">
+                <TextField fx:id="messageField"
+                           promptText="Type a message..."
+                           onAction="#sendPublic"
+                           HBox.hgrow="ALWAYS"/>
+                <Button text="Send" onAction="#sendPublic"/>
+            </HBox>
+        </VBox>
+    </center>
+
+</BorderPane>
