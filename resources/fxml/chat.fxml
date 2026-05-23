@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controller.ChatController"
+            style="-fx-background-color:#f4f6f8;">
+
+    <!-- TOP: status bar -->
+    <top>
+        <HBox style="-fx-background-color:#1f4e79; -fx-padding:8 14 8 14;">
+            <Label fx:id="statusLabel" text="Connected"
+                   style="-fx-text-fill:white; -fx-font-size:13px; -fx-font-weight:bold;"/>
+        </HBox>
+    </top>
+
+    <!-- CENTER: tabbed chat area -->
+    <center>
+        <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE">
+
+            <!-- Public Chat tab -->
+            <Tab text="Public Chat">
+                <VBox spacing="6">
+                    <padding><Insets top="8" right="8" bottom="8" left="8"/></padding>
+                    <TextArea fx:id="publicArea" editable="false"
+                              VBox.vgrow="ALWAYS" wrapText="true"
+                              style="-fx-font-family:'Courier New'; -fx-font-size:12px;"/>
+                    <HBox spacing="6">
+                        <TextField fx:id="messageField" promptText="Type a message…"
+                                   HBox.hgrow="ALWAYS"
+                                   onAction="#sendPublic"/>
+                        <Button text="Send" onAction="#sendPublic"
+                                style="-fx-background-color:#2e75b6; -fx-text-fill:white;"/>
+                    </HBox>
+                </VBox>
+            </Tab>
+
+            <!-- Direct Messages tab -->
+            <Tab text="Direct Message">
+                <VBox spacing="6">
+                    <padding><Insets top="8" right="8" bottom="8" left="8"/></padding>
+                    <HBox spacing="6" alignment="CENTER_LEFT">
+                        <Label text="To:" style="-fx-font-weight:bold;"/>
+                        <TextField fx:id="dmRecipientField" promptText="Recipient username"
+                                   prefWidth="180"/>
+                    </HBox>
+                    <TextArea fx:id="dmArea" editable="false"
+                              VBox.vgrow="ALWAYS" wrapText="true"
+                              style="-fx-font-family:'Courier New'; -fx-font-size:12px;"/>
+                    <HBox spacing="6">
+                        <TextField promptText="Type a DM…" HBox.hgrow="ALWAYS"
+                                   onAction="#sendDM"/>
+                        <Button text="Send DM" onAction="#sendDM"
+                                style="-fx-background-color:#70ad47; -fx-text-fill:white;"/>
+                    </HBox>
+                </VBox>
+            </Tab>
+
+        </TabPane>
+    </center>
+
+</BorderPane>

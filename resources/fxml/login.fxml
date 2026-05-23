@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controller.LoginController"
+      spacing="12" alignment="CENTER"
+      style="-fx-background-color: #f4f6f8;">
+
+    <padding><Insets top="30" right="40" bottom="30" left="40"/></padding>
+
+    <Label text="JavaFX Chat" style="-fx-font-size:22px; -fx-font-weight:bold; -fx-text-fill:#1f4e79;"/>
+    <Label text="Sign in or create an account" style="-fx-font-size:12px; -fx-text-fill:#555;"/>
+
+    <TextField fx:id="usernameField" promptText="Username" maxWidth="260"/>
+    <PasswordField fx:id="passwordField" promptText="Password" maxWidth="260"/>
+
+    <HBox spacing="10" alignment="CENTER">
+        <Button fx:id="loginButton" text="Login"    onAction="#handleLogin"
+                prefWidth="120" style="-fx-background-color:#2e75b6; -fx-text-fill:white; -fx-font-weight:bold;"/>
+        <Button text="Register" onAction="#handleRegister"
+                prefWidth="120" style="-fx-background-color:#70ad47; -fx-text-fill:white; -fx-font-weight:bold;"/>
+    </HBox>
+
+    <Label fx:id="statusLabel" text="" style="-fx-text-fill:#cc0000; -fx-font-size:11px;" wrapText="true" maxWidth="260"/>
+</VBox>

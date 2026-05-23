@@ -10,6 +10,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Handles all database operations for chat messages.
+ * Every connection / statement uses try-with-resources.
+ */
 public class MessageRepository {
 
     private final Connection connection;
@@ -35,11 +39,13 @@ public class MessageRepository {
         try (Statement st = connection.createStatement()) {
             st.execute(sql);
         } catch (SQLException e) {
-            throw new DatabaseException("Cannot create this message table", e);
+            throw new DatabaseException("Cannot create messages table", e);
         }
     }
 
+    // ── CREATE ────────────────────────────────────────────────────────────
 
+    /** Persists a message to the database. */
     public void save(Message msg) throws DatabaseException {
         String sql =
             "INSERT INTO messages (sender_id, content, timestamp, type, recipient)" +
@@ -56,6 +62,12 @@ public class MessageRepository {
         }
     }
 
+    // ── READ ─────────────────────────────────────────────────────────────
+
+    /**
+     * Returns the last {@code limit} PUBLIC messages in chronological order.
+     * Used to populate the chat pane when a client connects.
+     */
     public List<Message> getHistory(int limit) throws DatabaseException {
         String sql =
             "SELECT m.id, u.id AS uid, u.username, m.content, m.timestamp, m.type" +
@@ -83,7 +95,10 @@ public class MessageRepository {
         return list;
     }
 
-
+    /**
+     * Returns all PRIVATE messages between two users (either direction),
+     * ordered oldest-first.
+     */
     public List<Message> getDMHistory(String userA, String userB)
             throws DatabaseException {
         String sql =
